@@ -21,5 +21,5 @@ app.listen(8080, function () {
 });
 
 app.use(function (req, res) {
-	res.status(404).send('404 ERROR MATE DICKHEAD WRONG PAGE');
+	res.status(404).send('ERROR MATE! WRONG PAGE!:');
 });
