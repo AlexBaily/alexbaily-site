@@ -2,4 +2,10 @@ function getMessages() {
   document.getElementById("messageList").innerHTML = "test";
 }
 
-window.onload = function () { getMessages(); }
+
+$(document).ready(function(){
+  $.get("/api/messages", function(data, status) {
+    document.getElementById("messageList").innerHTML = data.message;
+    console.log(data);
+  });
+});

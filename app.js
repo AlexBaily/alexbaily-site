@@ -48,7 +48,11 @@ app.get('/api/messages', function (req, res) {
   docClient.query(params, function(err, data) {
 	if (err) { console.log(err) }  
 	else {
-		res.send (data);
+                var messageList = {
+                     chatID: data.Items[0].chatID,
+                     message: data.Items[0].message
+                };
+		res.send (messageList);
 	}
   });
 	
