@@ -2,6 +2,7 @@ html
   head
     link(href='css/main.css', rel='stylesheet')
     title= title
+    script(src='js/main.js')
   body
    div(class='navbar')
     h1= message
@@ -16,5 +17,6 @@ html
    form(method="post" class="message-form")
      label(for="message") Send a message
        input(type="text", name="message" required="true" autocomplete="off")
-     input(type="submit", value="Send message")
-   h1#messageList= messageList
+     input(type="submit", value="Send message" onclick="getMessages()")
+
+   p(class="messageList" id="messageList")= 'nout'
