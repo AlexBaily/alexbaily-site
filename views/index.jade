@@ -1,6 +1,20 @@
 html
   head
-   title= title
+    link(href='css/main.css', rel='stylesheet')
+    title= title
   body
+   div(class='navbar')
     h1= message
-    h2= platform
+   p= 'This website is currently running on: ' + platform
+     
+   ul(class="servers")
+     each server in servers
+      li
+       p(class="server-name")= server
+
+   p= 'Let us see if we can do forms then.'
+   form(method="post" class="message-form")
+     label(for="message") Send a message
+       input(type="text", name="message" required="true" autocomplete="off")
+     input(type="submit", value="Send message")
+   h1#messageList= messageList
