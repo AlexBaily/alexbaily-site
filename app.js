@@ -16,23 +16,13 @@ app.use(bodyParser.urlencoded({ extended: false}));
 //Returning responses for GET requires
 app.get('/', function (req, res) {
 
-  var docClient = new AWS.DynamoDB.DocumentClient();
-  var params = { TableName: "message-table", KeyConditionExpression: "chatID = :chatID", ExpressionAttributeValues: { ":chatID":"1" }};
-
   //Query the dynamoDB table to get the information on the messages
   //Todo: seperate getting the DynamoDB info into an API query and offload fetching of the data to the client side
-  docClient.query(params, function(err, data) {
-    if (err) { console.log(err); }
-    else {
-     console.log(data.Items[0].message);
      res.render('index',
               { title: 'Hello world!',
                 message: 'Welcome to the world of tomorrow!',
                 platform: osVer,
-                servers: instances,
-                messageList: data.Items[0].message});
-    }
-  })
+                servers: instances});
 });
 
 //Monitor URL for the load balancer
@@ -43,7 +33,9 @@ app.get('/monitor.htm', function (req, res) {
 app.get('/api/messages', function (req, res) {
 	
   var docClient = new AWS.DynamoDB.DocumentClient();
-  var params = { TableName: "message-table", KeyConditionExpression: "chatID = :chatID", ExpressionAttributeValues: { ":chatID":"1" }};	
+  var params = { TableName: "message-table", 
+                             KeyConditionExpression: "chatID = :chatID", 
+                             ExpressionAttributeValues: { ":chatID":"1" }};	
   
   docClient.query(params, function(err, data) {
 	if (err) { console.log(err) }  
@@ -64,7 +56,22 @@ app.post('/', function(req, res) {
     var message = req.body.message;
     if (message) {
        console.log(message);
-       res.redirect("/");
+       var docClient = new AWS.DynamoDB.DocumentClient();
+       var params = {
+            TableName: "message-table",
+            Item:{
+                "chatID": "1",
+                "message": message
+            }
+       };
+       docClient.put(params, function(err, data) {
+          if (err) {
+             console.error(err);
+          }
+          else { 
+             res.redirect("/");
+          }
+       });
     }
 });
 
