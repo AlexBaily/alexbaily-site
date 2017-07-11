@@ -55,6 +55,7 @@ app.get('/api/messages', function(req, res) {
                 chatID: data.Items[0].chatID,
                 message: data.Items[0].message
             };
+            res.header("Content-Type", "application/json");
             res.send(messageList);
         }
     });
