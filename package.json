@@ -2,9 +2,9 @@
   "name": "alexbaily-site",
   "version": "0.0.0",
   "description": "Alex Baily test site for learning some NodeJS / CI/CD / AWS Services",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "Alex Baily",
   "license": "BSD",
