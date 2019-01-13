@@ -2,13 +2,9 @@ const express = require('express');
 const app = express();
 var os = require('os');
 var bodyParser = require('body-parser');
-
+var dns = require('dns');
 var osVer = os.platform();
 var instances = ['server1', 'server2', 'server3']
-var AWS = require("aws-sdk");
-AWS.config.update({
-    region: 'eu-west-1'
-});
 
 //Set the view engine to jade
 app.set('view engine', 'jade');
@@ -38,27 +34,6 @@ app.get('/monitor.htm', function(req, res) {
 //pseudo "API" for gathering DynamoDB information, still required is client authentication
 app.get('/api/messages', function(req, res) {
 
-    var docClient = new AWS.DynamoDB.DocumentClient();
-    var params = {
-        TableName: "message-table",
-        KeyConditionExpression: "chatID = :chatID",
-        ExpressionAttributeValues: {
-            ":chatID": "1"
-        }
-    };
-
-    docClient.query(params, function(err, data) {
-        if (err) {
-            console.log(err)
-        } else {
-            var messageList = {
-                chatID: data.Items[0].chatID,
-                message: data.Items[0].message
-            };
-            res.header("Content-Type", "application/json");
-            res.send(messageList);
-        }
-    });
 });
 
 
@@ -68,27 +43,6 @@ app.post('/', function(req, res) {
     var message = req.body.message;
     if (message) {
         console.log(message);
-        var docClient = new AWS.DynamoDB.DocumentClient();
-        var params = {
-            TableName: "message-table",
-            Key: {
-                "chatID": "1"
-            },
-            UpdateExpression: "SET #attrName = list_append(#attrName, :attrValue)",
-            ExpressionAttributeNames: {
-                "#attrName": "message"
-            },
-            ExpressionAttributeValues: {
-                ":attrValue": [message]
-            }
-        };
-        docClient.update(params, function(err, data) {
-            if (err) {
-                console.error(err);
-            } else {
-                res.redirect("/");
-            }
-        });
     }
 });
 
