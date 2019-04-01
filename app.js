@@ -47,7 +47,7 @@ app.post('/', function(req, res) {
 });
 
 //Starts the application on port 8080
-app.listen(8080, function() {
+app.listen(80, function() {
     console.log('The application is listening on port 8080')
 });
 
