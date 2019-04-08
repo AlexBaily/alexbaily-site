@@ -9,11 +9,6 @@ html
     h1= message
    p= 'This website is currently running on: ' + platform
      
-   ul(class="servers")
-     each server in servers
-      li
-       p(class="server-name")= server
-
    p= 'Let us see if we can do forms then.'
    form(method="post" class="message-form")
      label(for="message") Send a message

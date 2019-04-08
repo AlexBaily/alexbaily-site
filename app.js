@@ -2,9 +2,7 @@ const express = require('express');
 const app = express();
 var os = require('os');
 var bodyParser = require('body-parser');
-var dns = require('dns');
 var osVer = os.platform();
-var instances = ['server1', 'server2', 'server3']
 
 //Set the view engine to jade
 app.set('view engine', 'jade');
@@ -21,7 +19,6 @@ app.get('/', function(req, res) {
         title: 'Hello world!',
         message: 'Welcome to the world of tomorrow!',
         platform: osVer,
-        servers: instances
     });
 });
 
@@ -31,13 +28,12 @@ app.get('/monitor.htm', function(req, res) {
 });
 
 
-//pseudo "API" for gathering DynamoDB information, still required is client authentication
-app.get('/api/messages', function(req, res) {
+//API for gathering Exercise information, still required is client authentication
+app.get('/api/exercises', function(req, res) {
 
 });
 
 
-//Post requests will amend the chat to DynamoDB.
 //TODO: Sanitize inputs, create OPTIONS, require auth?
 app.post('/', function(req, res) {
     var message = req.body.message;
@@ -53,5 +49,5 @@ app.listen(80, function() {
 
 //404 page
 app.use(function(req, res) {
-    res.status(404).send('ERROR MATE! WRONG PAGE!:');
+    res.status(404).send('Uh oh');
 });
