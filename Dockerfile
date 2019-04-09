@@ -1,5 +1,13 @@
 FROM node:boron
 
+#Set Environment Varialbes
+ARG CLIENTID
+ARG USERPOOLID
+ARG AWS_REGION
+ENV CLIENTID=${CLIENTID}
+ENV USERPOOLID=${USERPOOLID}
+ENV AWS_REGION=${AWS_REGION}
+
 # Create app directory
 WORKDIR /usr/src/app
 

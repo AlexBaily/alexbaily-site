@@ -9,11 +9,16 @@
   "author": "Alex Baily",
   "license": "BSD",
   "dependencies": {
+    "amazon-cognito-identity-js": "^3.0.10",
+    "async": "~2.5.0",
+    "aws-sdk": "^2.80.0",
+    "body-parser": "~1.17.2",
     "express": "~4.15.3",
     "jade": "~1.11.0",
-    "aws-sdk": "~2.80.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.1",
     "memcached": "~2.2.2",
-    "body-parser": "~1.17.2",
-    "async": "~2.5.0"
+    "node-fetch": "^2.3.0",
+    "request": "^2.88.0"
   }
 }

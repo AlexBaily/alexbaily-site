@@ -1,8 +1,26 @@
 const express = require('express');
 const app = express();
+
+
+//Packages imported for Cognito Access
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
+const AWS = require('aws-sdk');
+const request = require('request');
+const jwkToPem = require('jwk-to-pem');
+const jwt = require('jsonwebtoken');
+global.fetch = require('node-fetch');
+
 var os = require('os');
 var bodyParser = require('body-parser');
 var osVer = os.platform();
+
+const poolData = {    
+UserPoolId : process.env.USERPOOLID, // Your user pool id here    
+ClientId : process.env.CLIENTID // Your client id here
+}; 
+const pool_region = process.env.AWS_REGION;
+
 
 //Set the view engine to jade
 app.set('view engine', 'jade');
