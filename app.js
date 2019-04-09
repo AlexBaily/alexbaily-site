@@ -15,18 +15,20 @@ var os = require('os');
 var bodyParser = require('body-parser');
 var osVer = os.platform();
 
-const poolData = {    
-UserPoolId : process.env.USERPOOLID, // Your user pool id here    
-ClientId : process.env.CLIENTID // Your client id here
+const poolParams = {    
+    UserPoolId : process.env.USERPOOLID,   
+    ClientId : process.env.CLIENTID
 }; 
 const pool_region = process.env.AWS_REGION;
+
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolParams);
 
 
 //Set the view engine to jade
 app.set('view engine', 'jade');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 
 //Returning responses for GET requires
@@ -48,6 +50,36 @@ app.get('/monitor.htm', function(req, res) {
 
 //API for gathering Exercise information, still required is client authentication
 app.get('/api/exercises', function(req, res) {
+
+});
+
+//Login
+app.post('/login', function(req, res) {
+    var username=req.body.username;
+    var password=req.body.password;
+
+    var authCreds = new AmazonCognitoIdentity.AuthenticationDetails({
+        Username : username,
+        Password : password,
+    });
+ 
+    var userInfo = {
+        Username : username,
+        Pool : userPool
+    };
+
+    var cogUser = new AmazonCognitoIdentity.CognitoUser(userInfo);
+    cogUser.authenticateUser(authCreds, {
+        onSuccess: function (result) {
+            console.log('access token + ' + result.getAccessToken().getJwtToken());
+            console.log('id token + ' + result.getIdToken().getJwtToken());
+            console.log('refresh token + ' + result.getRefreshToken().getToken());
+        },
+        onFailure: function(err) {
+            console.log(err);
+        },
+
+    });
 
 });
 
