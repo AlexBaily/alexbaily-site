@@ -15,6 +15,7 @@ var os = require('os');
 var bodyParser = require('body-parser');
 var osVer = os.platform();
 
+
 const poolParams = {    
     UserPoolId : process.env.USERPOOLID,   
     ClientId : process.env.CLIENTID
@@ -50,6 +51,40 @@ app.get('/monitor.htm', function(req, res) {
 
 //API for gathering Exercise information, still required is client authentication
 app.get('/api/exercises', function(req, res) {
+
+});
+
+//Register
+app.post('/register', function(req, res) {
+    var email = req.body.email;
+    var username=req.body.username;
+    var password=req.body.password; 
+
+    var attributeList = [];
+    
+    var dataEmail = {
+        Name : 'email',
+        Value : email
+    };
+
+    var dataName = {
+        Name : 'name',
+        Value : username
+    };
+    var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+    var attributeName = new AmazonCognitoIdentity.CognitoUserAttribute(dataName);
+
+    attributeList.push(attributeEmail);
+    attributeList.push(attributeName);
+
+    userPool.signUp(username, password, attributeList, null, function(err, result){
+        if (err) {
+            console.log(err);
+            return;
+        }
+        cognitoUser = result.user;
+        console.log('user name is ' + cognitoUser.getUsername());
+    });
 
 });
 
