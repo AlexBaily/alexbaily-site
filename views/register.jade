@@ -1,0 +1,18 @@
+html
+  head
+    link(href='css/main.css', rel='stylesheet')
+    title= title
+    script(src='js/jquery-3.2.1.js')
+    script(src='js/main.js')
+  body
+   div(class='navbar')
+   p= 'Registration form.'
+   form(method="post" class="registration-form")
+     label(for="email") Email Address
+       input(type="text", name="email" required="true" autocomplete="off")
+     label(for="username") Username
+       input(type="text", name="username" required="true" autocomplete="off")
+     label(for="password") Password
+       input(type="text", name="password" required="true" autocomplete="off")
+     input(type="submit", value="Complete registration")
+

@@ -54,6 +54,13 @@ app.get('/api/exercises', function(req, res) {
 
 });
 
+
+app.get('/register', function(req, res) {
+
+    res.render('register');
+
+});
+
 //Register
 app.post('/register', function(req, res) {
     var email = req.body.email;
@@ -87,6 +94,13 @@ app.post('/register', function(req, res) {
     });
 
 });
+
+app.get('/confirmation', function(req, res) {
+  
+   res.render('confirmation');
+
+});
+
 
 //Login
 app.post('/login', function(req, res) {
