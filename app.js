@@ -62,7 +62,7 @@ app.get('/register', function(req, res) {
 });
 
 //Register
-app.post('/register', function(req, res) {
+app.post('/api/register', function(req, res) {
     var email = req.body.email;
     var username=req.body.username;
     var password=req.body.password; 
@@ -87,11 +87,15 @@ app.post('/register', function(req, res) {
     userPool.signUp(username, password, attributeList, null, function(err, result){
         if (err) {
             console.log(err);
+            //Testing sending a 401 so we get a popup alert on the frontend if
+            //we see an error on creating a user.
+            res.status(401).send();
             return;
         }
         cognitoUser = result.user;
         console.log('user name is ' + cognitoUser.getUsername());
     });
+
 
 });
 
