@@ -106,7 +106,7 @@ app.get('/confirmation', function(req, res) {
 });
 
 //Verify the user after registration.
-app.post('/register/verification', function(req, res) {
+app.post('/register/confirm', function(req, res) {
 
     var username=req.body.username;
     var verifyCode=req.body.verifycode;
