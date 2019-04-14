@@ -105,6 +105,29 @@ app.get('/confirmation', function(req, res) {
 
 });
 
+//Verify the user after registration.
+app.post('/register/verification', function(req, res) {
+
+    var username=req.body.username;
+    var verifyCode=req.body.verifycode;
+
+    var userData = {
+        Username : username,
+        Pool : userPool
+    };
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+    cognitoUser.confirmRegistration(verifycode, true, function(err, result) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+            console.log(result);
+            res.redirect('/');
+    });
+
+});
+
 
 //Login
 app.post('/login', function(req, res) {
