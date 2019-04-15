@@ -18,7 +18,7 @@ $(document).ready(function(){
         event.preventDefault();
 
         var fd = new FormData(registerForm);
-        const data = new URLSearchParams(fd);
+        var data = new URLSearchParams(fd);
         fetch("/api/register", {
             method: "POST",
             headers: {
@@ -36,7 +36,7 @@ $(document).ready(function(){
         }, function(e) {
             alert("Error submitting form!");
         });
-    }
+    };
 
     var confirmForm = document.getElementById('confirmation-form');
 
@@ -44,14 +44,14 @@ $(document).ready(function(){
         //Stops the form from send the data before we intercept.
         event.preventDefault();
 
-        var fd = new FormData(confirmrForm);
-        const data = new URLSearchParams(fd);
-        fetch("/register/confirm", {
+        var fdconfirm = new FormData(confirmForm);
+        var confirmdata = new URLSearchParams(fdconfirm);
+        fetch("/api/register/confirm", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: data
+            body: confirmdata
         }).then(function(res) {
         if (res.ok) {
             alert("Thanks! You are now confirmed.");
@@ -61,7 +61,7 @@ $(document).ready(function(){
         }, function(e) {
             alert("Error submitting form!");
         });
-    }
+    };
 
     
 });

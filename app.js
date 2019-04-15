@@ -106,17 +106,17 @@ app.get('/confirmation', function(req, res) {
 });
 
 //Verify the user after registration.
-app.post('/register/confirm', function(req, res) {
+app.post('/api/register/confirm', function(req, res) {
 
     var username=req.body.username;
-    var verifyCode=req.body.verifycode;
-
+    var verifycode=req.body.verifycode;
     var userData = {
         Username : username,
         Pool : userPool
     };
+    //CofnitoUser is the class that must be used for confirming registration.
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-
+    //Confirm registration by calling the confirmRegistration method.
     cognitoUser.confirmRegistration(verifycode, true, function(err, result) {
         if (err) {
             console.log(err);

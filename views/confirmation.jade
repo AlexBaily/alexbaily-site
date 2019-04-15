@@ -4,12 +4,11 @@ html
     title= title
     script(src='js/jquery-3.2.1.js')
     script(src='js/main.js')
+    script(src='js/confirmation.js')
   body
    div(class='navbar')
    p= 'Confirmation.'
    form(method="post" class="confirmation-form" id="confirmation-form" name="confirmation-form")
-     label(for="email") Email Address
-       input(type="text", name="email" required="true" autocomplete="off")
      label(for="username") Username
        input(type="text", name="username" required="true" autocomplete="off")
      label(for="verifycode") Verification Code
