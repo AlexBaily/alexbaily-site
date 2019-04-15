@@ -89,11 +89,12 @@ app.post('/api/register', function(req, res) {
             console.log(err);
             //Testing sending a 401 so we get a popup alert on the frontend if
             //we see an error on creating a user.
-            res.status(401).send();
+            res.status(401).send(err);
             return;
         }
         cognitoUser = result.user;
         console.log('user name is ' + cognitoUser.getUsername());
+        res.send(result.user);
     });
 
 
