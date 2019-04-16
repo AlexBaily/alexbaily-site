@@ -86,10 +86,15 @@ app.post('/api/register', function(req, res) {
 
     userPool.signUp(username, password, attributeList, null, function(err, result){
         if (err) {
-            console.log(err);
+            console.log(err.message);
             //Testing sending a 401 so we get a popup alert on the frontend if
             //we see an error on creating a user.
-            res.status(401).send(err);
+            if (err.message.includes("password")) {
+                errorMessage = "Password must be at least 6 characters long and contain an Uppercase, a number and a special character e.g. !@?";
+            } else {
+                errorMessage = err.message;
+            }
+            res.status(401).send(errorMessage);
             return;
         }
         cognitoUser = result.user;
