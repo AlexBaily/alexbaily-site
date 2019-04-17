@@ -129,9 +129,13 @@ app.post('/api/register/confirm', function(req, res) {
             return;
         }
             console.log(result);
-            res.redirect('/');
     });
 
+});
+
+app.get('/login', function(req, res) {
+
+    res.render('login')
 });
 
 
@@ -156,6 +160,8 @@ app.post('/login', function(req, res) {
             console.log('access token + ' + result.getAccessToken().getJwtToken());
             console.log('id token + ' + result.getIdToken().getJwtToken());
             console.log('refresh token + ' + result.getRefreshToken().getToken());
+            res.cookie('jwt', result.getIdToken().getJwtToken());
+            res.status(200).send()
         },
         onFailure: function(err) {
             console.log(err);

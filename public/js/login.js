@@ -1,22 +1,22 @@
 $(document).ready(function(){
-    var confirmForm = document.getElementById('confirmation-form');
+    var loginForm = document.getElementById('login-form');
 
-    confirmForm.onsubmit = function(event) {
+    loginForm.onsubmit = function(event) {
         //Stops the form from send the data before we intercept.
         event.preventDefault();
 
-        var fdconfirm = new FormData(confirmForm);
-        var confirmData = new URLSearchParams(fdconfirm);
-        fetch("/api/register/confirm", {
+        var fd = new FormData(loginForm);
+        var loginData = new URLSearchParams(fd);
+        fetch("/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: confirmData
+            body: loginData
         }).then(function(res) {
         if (res.ok) {
-            alert("Thanks! You are now confirmed.");
-            window.location.href = "/login";
+            alert("Thanks! You are now logged in.");
+            window.location.href = "/";
         } else if (res.status == 401) {
             alert("Oops! You are not authorized.");
         }
