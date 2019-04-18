@@ -160,7 +160,7 @@ app.post('/login', function(req, res) {
             console.log('access token + ' + result.getAccessToken().getJwtToken());
             console.log('id token + ' + result.getIdToken().getJwtToken());
             console.log('refresh token + ' + result.getRefreshToken().getToken());
-            res.cookie('jwt', result.getIdToken().getJwtToken());
+            res.cookie('jwt', result.getIdToken().getJwtToken(), { httpOnly: true });
             res.status(200).send()
         },
         onFailure: function(err) {
