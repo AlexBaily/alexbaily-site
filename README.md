@@ -1,1 +1,3 @@
-Test website for learning CI / CD and studying for AWS exams.
+Test website for learning CI / CD, Kubernetes and Docker.
+
+Cognito used for Authentication.
