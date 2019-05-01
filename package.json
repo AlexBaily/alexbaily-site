@@ -4,7 +4,7 @@
   "description": "Alex Baily test site for learning some NodeJS / CI/CD / AWS Services",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.local.js"
   },
   "author": "Alex Baily",
   "license": "BSD",
@@ -12,6 +12,7 @@
     "amazon-cognito-identity-js": "^3.0.10",
     "async": "~2.5.0",
     "aws-sdk": "^2.80.0",
+    "aws-serverless-express": "^3.3.6",
     "body-parser": "^1.17.2",
     "express": "~4.15.3",
     "jade": "~1.11.0",

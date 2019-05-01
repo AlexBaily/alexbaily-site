@@ -180,12 +180,9 @@ app.post('/', function(req, res) {
     }
 });
 
-//Starts the application on port 8080
-app.listen(80, function() {
-    console.log('The application is listening on port 8080')
-});
-
 //404 page
 app.use(function(req, res) {
     res.status(404).send('Uh oh');
 });
+
+module.exports = app
