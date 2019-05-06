@@ -17,7 +17,7 @@ var osVer = os.platform();
 
 
 const poolParams = {    
-    UserPoolId : process.env.USERPOOLID,   
+    UserPoolId : process.env.USERPOOLID,
     ClientId : process.env.CLIENTID
 }; 
 const pool_region = process.env.AWS_REGION;
@@ -161,6 +161,7 @@ app.post('/login', function(req, res) {
             console.log('id token + ' + result.getIdToken().getJwtToken());
             console.log('refresh token + ' + result.getRefreshToken().getToken());
             res.cookie('jwt', result.getIdToken().getJwtToken(), { httpOnly: true });
+            res.cookie('jwtref', result.getRefreshToken().getToken(), { httpOnly: true});
             res.status(200).send()
         },
         onFailure: function(err) {
