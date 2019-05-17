@@ -1,15 +1,13 @@
 pipeline {
-    agent { 
-        dockerfile {
-            additionalBuildArgs '--build-arg USERPOOLID=${USERPOOLID} --build-arg CLIENTID=${CLIENTID} --build-arg AWS_REGION=${AWS_REGION}'
-        } 
-    }
+    agent any
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
-                sh 'svn --version'
-                sh 'curl http://localhost/'
+                scriot {
+                    checkout scm
+
+                    def siteImage = docker.build("frontend:1", "--build-arg USERPOOLID=${USERPOOLID} --build-arg CLIENTID=${CLIENTID} --build-arg AWS_REGION=${AWS_REGION} .")
+                } 
             }
         }
     }
