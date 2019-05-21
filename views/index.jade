@@ -11,11 +11,6 @@ html
     h1= message
    p= 'This website is currently running on: ' + platform
      
-   p= 'Let us see if we can do forms then.'
-   form(method="post" class="message-form")
-     label(for="message") Send a message
-       input(type="text", name="message" required="true" autocomplete="off")
-     input(type="submit", value="Send message" onclick="getMessages()")
 
    ul(class="messageList" id="messageList")
   
