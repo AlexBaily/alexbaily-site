@@ -3,13 +3,13 @@ apiVersion: v1
 metadata:
   name: site-frontend-service
 spec:
-  type: NodePort
+  #Using LoadBalancer for ingress, will change to NodePort for ALB.
+  type: LoadBalancer
   selector:
     app: site-frontend
   ports:
   - protocol: TCP
     #The first port is the one that is exposed to the K8s cluster internally
-    #The targetPort is the port that the application exposes. 
-    port: 8082
+    #The targetPort is the port that the container exposes. 
+    port: 80
     targetPort: 80
-    nodePort: 31706
